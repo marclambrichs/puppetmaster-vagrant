@@ -34,8 +34,8 @@ Your environment should contain:
 \item virtualbox
 \item and finally, some rubygems:
 \begin{enumerate}
-\item vagrant-cachier
-\item vagrant-hosts
+\item vagrant-cachier (optional)
+\item vagrant-hostmanager
 \item vagrant-vbguest
 \end{enumerate}
 \end{enumerate}
@@ -60,9 +60,9 @@ The puppetmaster functionality is split up in 3 separate repositories.
 \begin{minted}[bgcolor=black,formatcom=\color{white},fontsize=\footnotesize]{bash}
 marc:~ marc$ mkdir vagrant
 marc:~ marc$ cd vagrant
-marc:~ marc$ git clone https://github.com/mlambrichs/puppetmaster-vagrant.git puppetmaster-vagrant
-marc:~ marc$ cd puppetmaster
-marc:~ marc$ git submodule update --init --recursive
+marc:vagrant marc$ git clone https://github.com/mlambrichs/puppetmaster-vagrant.git puppetmaster-vagrant
+marc:vagrant marc$ cd puppetmaster-vagrant
+marc:puppetmaster-vagrant marc$ git submodule update --init --recursive
 \end{minted}
 
 \par Now, you're ready to install your own puppetmaster.
@@ -72,11 +72,11 @@ marc:~ marc$ git submodule update --init --recursive
 \section{Step 1: Puppetmaster}
 
 \subsection{Puppetmaster, r10k, puppetdb and foreman in one go}
-Cd into your puppetmaster directory and start up vagrant.
+Cd into your puppetmaster-vagrant directory and start up vagrant.
 
 \begin{minted}[bgcolor=black,formatcom=\color{white},fontsize=\footnotesize]{bash}
-marc:~ marc$ cd ~/vagrant/puppetmaster
-marc:puppetmaster marc$ vagrant up
+marc:~ marc$ cd ~/vagrant/puppetmaster-vagrant
+marc:puppetmaster-vagrant marc$ vagrant up
 \end{minted}
 
 This will start off a lot of output, ending with a \emph{puppet apply} on your vagrant box. Next thing to do, is to check if everything is working.
@@ -98,8 +98,8 @@ This will start off a lot of output, ending with a \emph{puppet apply} on your v
 \end{itemize} 
 
 \begin{minted}[bgcolor=black,formatcom=\color{white},fontsize=\footnotesize]{bash}
-marc:~ marc$ cd ~/vagrant/puppetmaster
-marc:puppetmaster marc$ vagrant ssh
+marc:~ marc$ cd ~/vagrant/puppetmaster-vagrant
+marc:puppetmaster-vagrant marc$ vagrant ssh
 Linux debian 3.2.0-4-amd64 #1 SMP Debian 3.2.65-1+deb7u1 x86_64
 
 The programs included with the Debian GNU/Linux system are free software;
