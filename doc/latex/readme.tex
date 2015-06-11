@@ -88,12 +88,8 @@ marc:puppetmaster marc$ vagrant up
 This will start off a lot of output, ending with a \emph{puppet apply} on your vagrant box. Next thing to do, is to check if everything is working.
 
 \subsection{Check and doublecheck}
-For convenience, add an entry to your local /etc/hosts file:\\
-\begin{minted}[bgcolor=black,formatcom=\color{white},fontsize=\footnotesize]{bash}
-marc:puppetmaster marc$ sudo echo '10.0.0.2        puppet.arthurjames.local' >> /etc/hosts
-\end{minted}
 
-\par First, let's check if your puppetdb is running. Open your browser with http://puppet.arthurjames.local:8080 and you should see something like this:\\
+\par First, let's check if your puppetdb is running. Open your browser with http://puppet.arthurjames.vagrant:8080 and you should see something like this:\\
 \includegraphics[scale=0.3]{images/puppetdb}
 
 
