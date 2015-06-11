@@ -3,10 +3,10 @@
 :sources:
   :puppet:
     basedir: '/etc/puppet/environments'
-    remote: 'git@cassandra.melange-it.nl:/var/opt/git/generic/r10k.git'
+    remote: 'https://github.com/mlambrichs/arthurjames-r10k.git'
   :hiera:
     basedir: '/var/lib/hiera'
-    remote: 'git@cassandra.melange-it.nl:/var/opt/git/generic/hiera.git'
+    remote: 'https://github.com/mlambrichs/arthurjames-hiera.git'
 
 :purgedirs:
   - '/var/lib/hiera'
