@@ -1,6 +1,3 @@
-[submodule "puppet/modlules/r10k"]
-	path = puppet/modlules/r10k
-	url = https://github.com/acidprime/r10k.git
 [submodule "puppet/modules/git"]
 	path = puppet/modules/git
 	url = https://github.com/puppetlabs/puppetlabs-git.git
@@ -10,3 +7,6 @@
 [submodule "puppet/modules/stdlib"]
 	path = puppet/modules/stdlib
 	url = https://github.com/puppetlabs/puppetlabs-stdlib.git
+[submodule "puppet/modules/r10k"]
+	path = puppet/modules/r10k
+	url = https://github.com/acidprime/r10k.git
