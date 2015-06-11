@@ -60,20 +60,14 @@ The puppetmaster functionality is split up in 3 separate repositories.
 \begin{minted}[bgcolor=black,formatcom=\color{white},fontsize=\footnotesize]{bash}
 marc:~ marc$ mkdir vagrant
 marc:~ marc$ cd vagrant
-marc:~ marc$ git clone git@cassandra.melange-it.nl:/var/opt/git/generic/puppetmaster.git puppetmaster
+marc:~ marc$ git clone https://github.com/mlambrichs/puppetmaster-vagrant.git puppetmaster-vagrant
 marc:~ marc$ cd puppetmaster
 marc:~ marc$ git submodule update --init --recursive
 \end{minted}
 
-\par Before building, you need to add your own entry in puppetmaster/config/boxes.yaml.
-
 \par Now, you're ready to install your own puppetmaster.
 
 \section{Boxes}
-
-To start up a puppetmaster using vagrant, we need to have a basic vagrant box upon which we put our necessary software. The definition of boxes you need are defined in the file config/boxes.yaml.
-Obviously, you could use your own box or get one from a public repo.\\
-Take a look at https://atlas.hashicorp.com/boxes/search or http://vagrantbox.es.
 
 \section{Step 1: Puppetmaster}
 
