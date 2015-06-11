@@ -1,0 +1,5 @@
+---
+classes:
+  - arthurjames::notify
+
+r10k::version: '1.5.1'

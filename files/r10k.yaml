@@ -1,0 +1,12 @@
+---
+:cachedir: '/var/cache/r10k'
+:sources:
+  :puppet:
+    basedir: '/etc/puppet/environments'
+    remote: 'git@cassandra.melange-it.nl:/var/opt/git/generic/r10k.git'
+  :hiera:
+    basedir: '/var/lib/hiera'
+    remote: 'git@cassandra.melange-it.nl:/var/opt/git/generic/hiera.git'
+
+:purgedirs:
+  - '/var/lib/hiera'
