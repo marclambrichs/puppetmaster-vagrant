@@ -45,7 +45,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define server["name"] do |srv|
     config.vm.hostname                = server["hostname"]
-    srv.vm.box                        = server["box"]
+    srv.vm.box                        = "../../boxes/" << server["box"]
     srv.vm.provider :virtualbox do |vb|
       vb.name   = server["name"]
       vb.memory = server["ram"]
@@ -78,10 +78,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     srv.vm.provision :hosts
     # update repo
+    srv.vm.provision :shell, :inline => <<-SHELL
+      wget https://apt.puppetlabs.com/puppetlabs-release-pc1-wheezy.deb
+      sudo apt-get -y install puppetlabs-release-pc1-wheezy.deb
+      sudo apt-get update
+    SHELL
+
     # we could move this to the base box, so loading will be faster
     srv.vm.provision :shell, :inline => <<-SHELL
       apt-get update --fix-missing
       # prepare puppetmaster environment
+      test -d /etc/puppet || mkdir /etc/puppet
       cp /vagrant/files/autosign.conf /etc/puppet
       cp /vagrant/files/hiera.yaml /etc/puppet
       cp /vagrant/files/r10k.yaml /etc/puppet
@@ -89,6 +96,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       test -d ~/.ssh || cp -rf /vagrant/files/.ssh ~
       chmod 600 ~/.ssh/id_rsa
     SHELL
+
     # install R10K
     srv.vm.provision :puppet do |puppet|
       puppet.working_directory = "/vagrant/puppet"
