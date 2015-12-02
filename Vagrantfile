@@ -37,6 +37,12 @@ PUPPETAPPLY = "puppet apply --verbose --hiera_config /etc/puppet/hiera.yaml --mo
 ################################################################################
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
+#  if Vagrant.has_plugin?("vagrant-proxyconf")
+#      config.proxy.http     = "http://localhost:8080/"
+#      config.proxy.https    = "http://localhost:8080/"
+#      config.proxy.no_proxy = "localhost,127.0.0.1,.local,.vagrant"
+#  end
+
   ##############################################################################
   # Change hosts file, both on clients and host
   ##############################################################################
