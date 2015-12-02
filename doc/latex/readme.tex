@@ -86,11 +86,15 @@ This will start off a lot of output, ending with a \emph{puppet apply} on your v
 \par First, let's check if your puppetdb is running. Open your browser with http://puppet.arthurjames.vagrant:8080 and you should see something like this:\\
 \includegraphics[scale=0.3]{images/puppetdb}
 
-
 \par Next, check if you can access foreman. On the same host on port 80 you should see:\\
 \includegraphics[scale=0.3]{images/foreman}
 
 \par If you can, check if you can log in to foreman with credentials \emph{admin/changeme}.
+
+\par Go to Administer $>$ Settings $>$ PuppetDB and set \emph{puppetdb\_address}, \emph{puppetdb\_dashboard\_address}.
+
+\par In Administer $>$ Settings $>$ PuppetD set \emph{puppetdb\_enabled} to true.
+\\
 \par Probably no nodes have been recognized, so there are two options here:
 \begin{itemize}
 \item wait for 30 min (the default setting inbetween puppet agent runs)
