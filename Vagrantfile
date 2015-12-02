@@ -12,6 +12,8 @@ plugins.each do |plugin|
   end
 end
 
+
+
 ################################################################################
 # read YAML file with server and box details
 ################################################################################
@@ -48,7 +50,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     srv.vm.box                        = "../../boxes/" << server["box"]
     srv.vm.provider :virtualbox do |vb|
       vb.name   = server["name"]
-      vb.memory = server["ram"]
+      vb.customize [
+         'modifyvm', :id,
+         '--groups', '/Vagrant',
+         '--memory', server["ram"],
+      ]
     end
     srv.vm.network "private_network", ip: server["ip"]
 
