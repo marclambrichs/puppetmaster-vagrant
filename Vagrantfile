@@ -5,14 +5,17 @@ require 'yaml'
 ################################################################################
 # check plugins
 ################################################################################
-plugins = ["vagrant-hostmanager", "vagrant-vbguest"]
-plugins.each do |plugin|
-  unless Vagrant.has_plugin?(plugin)
-    raise plugin << " has not been installed."
+required_plugins = %w(vagrant-hostmanager vagrant-hosts vagrant-vbguest)
+
+plugins_to_install = required_plugins.select { |plugin| not Vagrant.has_plugin? plugin }
+if not plugins_to_install.empty?
+  puts "Installing plugins: #{plugins_to_install.join(' ')}"
+  if system "vagrant plugin install #{plugins_to_install.join(' ')}"
+    exec "vagrant #{ARGV.join(' ')}"
+  else
+    abort "Installation of one or more plugins has failed. Aborting."
   end
 end
-
-
 
 ################################################################################
 # read YAML file with server and box details
@@ -38,9 +41,8 @@ PUPPETAPPLY = "puppet apply --verbose --hiera_config /etc/puppet/hiera.yaml --mo
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 #  if Vagrant.has_plugin?("vagrant-proxyconf")
-#      config.proxy.http     = "http://localhost:8080/"
-#      config.proxy.https    = "http://localhost:8080/"
-#      config.proxy.no_proxy = "localhost,127.0.0.1,.local,.vagrant"
+#      config.proxy.http     = "http://10.0.2.2:8080/"
+#      config.proxy.https    = "http://10.0.2.2:8080/"
 #  end
 
   ##############################################################################
@@ -50,10 +52,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.hostmanager.manage_host = true
   config.hostmanager.ignore_private_ip = false
   config.hostmanager.include_offline = true
+#  config.hostmanager.aliases = %(puppet.arthurjames.vagrant puppetdb puppetmaster)
 
   config.vm.define server["name"] do |srv|
     config.vm.hostname                = server["hostname"]
-    srv.vm.box                        = "../../boxes/" << server["box"]
+    srv.vm.box                        = server["box"]
     srv.vm.provider :virtualbox do |vb|
       vb.name   = server["name"]
       vb.customize [
