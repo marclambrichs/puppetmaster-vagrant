@@ -40,11 +40,6 @@ PUPPETAPPLY = "puppet apply --verbose --hiera_config /etc/puppet/hiera.yaml --mo
 ################################################################################
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-#  if Vagrant.has_plugin?("vagrant-proxyconf")
-#      config.proxy.http     = "http://10.0.2.2:8080/"
-#      config.proxy.https    = "http://10.0.2.2:8080/"
-#  end
-
   ##############################################################################
   # Change hosts file, both on clients and host
   ##############################################################################
@@ -52,7 +47,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.hostmanager.manage_host = true
   config.hostmanager.ignore_private_ip = false
   config.hostmanager.include_offline = true
-#  config.hostmanager.aliases = %(puppet.arthurjames.vagrant puppetdb puppetmaster)
+
 
   config.vm.define server["name"] do |srv|
     config.vm.hostname                = server["hostname"]
@@ -69,7 +64,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     if server["ports"]
       server["ports"].each do |port|
-        srv.vm.network "forwarded_port", guest_ip: server["ip"], guest: port["guest"], host: port["host"]
+        srv.vm.network "forwarded_port", host_ip: "127.0.0.1", guest: port["guest"], host: port["host"]
       end
     end
 
