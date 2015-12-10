@@ -1,7 +1,7 @@
 ---
-name    : puppetmaster
-hostname: puppet.arthurjames.vagrant
-box     : vagrant-debian-wheezy
-ram     : 2048
-cpus    : 2
-ip      : 10.0.11.2
+name         : puppetmaster
+hostname     : puppet.arthurjames.vagrant
+box          : vagrant-debian-wheezy
+ram          : 2048
+cpus         : 2
+ip           : 10.0.11.2

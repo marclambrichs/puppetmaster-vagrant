@@ -105,6 +105,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # add ssh keys for accessing git server
       test -d ~/.ssh || cp -rf /vagrant/files/.ssh ~
       chmod 600 ~/.ssh/id_rsa
+      # copy your own puppet modules to default dir
+      cp -Rf /vagrant/modules/* /etc/puppet/modules
+      chown -R puppet:puppet /etc/puppet/modules
     SHELL
 
     # install R10K
