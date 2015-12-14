@@ -1,6 +1,10 @@
 ---
 name         : puppetmaster
 hostname     : puppet.arthurjames.vagrant
+aliases:
+  - puppet
+  - puppetmaster
+  - puppetdb
 box          : vagrant-debian-wheezy
 ram          : 2048
 cpus         : 2
