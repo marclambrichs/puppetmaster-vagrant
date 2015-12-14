@@ -5,7 +5,7 @@ require 'yaml'
 ################################################################################
 # check plugins
 ################################################################################
-required_plugins = %w(vagrant-hostmanager vagrant-hosts vagrant-vbguest)
+required_plugins = %w(vagrant-hostmanager vagrant-vbguest)
 
 plugins_to_install = required_plugins.select { |plugin| not Vagrant.has_plugin? plugin }
 if not plugins_to_install.empty?
@@ -48,9 +48,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.hostmanager.ignore_private_ip = false
   config.hostmanager.include_offline = true
 
-
   config.vm.define server["name"] do |srv|
     config.vm.hostname                = server["hostname"]
+    srv.hostmanager.aliases           = server["aliases"]
     srv.vm.box                        = server["box"]
     srv.vm.provider :virtualbox do |vb|
       vb.name   = server["name"]
@@ -86,7 +86,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       end
     end
 
-    srv.vm.provision :hosts
     # update repo
     srv.vm.provision :shell, :inline => <<-SHELL
       wget https://apt.puppetlabs.com/puppetlabs-release-pc1-wheezy.deb
@@ -105,9 +104,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # add ssh keys for accessing git server
       test -d ~/.ssh || cp -rf /vagrant/files/.ssh ~
       chmod 600 ~/.ssh/id_rsa
-      # copy your own puppet modules to default dir
-      cp -Rf /vagrant/modules/* /etc/puppet/modules
-      chown -R puppet:puppet /etc/puppet/modules
     SHELL
 
     # install R10K
