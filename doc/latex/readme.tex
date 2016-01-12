@@ -42,7 +42,7 @@ Your environment should contain:
 Example: installing vagrant-cachier:
 
 \begin{minted}[bgcolor=black,formatcom=\color{white},fontsize=\footnotesize]{bash}
-marc:~ marc$ sudo gem install vagrant-cachier
+marc:~ marc$ sudo vagrant plugin install vagrant-cachier
 \end{minted}
 
 \section{Structure}
@@ -60,9 +60,7 @@ The puppetmaster functionality is split up in 3 separate repositories.
 \begin{minted}[bgcolor=black,formatcom=\color{white},fontsize=\footnotesize]{bash}
 marc:~ marc$ mkdir vagrant
 marc:~ marc$ cd vagrant
-marc:vagrant marc$ git clone https://github.com/mlambrichs/puppetmaster-vagrant.git puppetmaster-vagrant
-marc:vagrant marc$ cd puppetmaster-vagrant
-marc:puppetmaster-vagrant marc$ git submodule update --init --recursive
+marc:vagrant marc$ git clone https://github.com/mlambrichs/puppetmaster-vagrant.git --recursive puppetmaster-vagrant
 \end{minted}
 
 \par Now, you're ready to install your own puppetmaster.
