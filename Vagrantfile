@@ -56,7 +56,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vb.name   = server["name"]
       vb.customize [
          'modifyvm', :id,
-         '--groups', '/Vagrant',
+         '--groups', '/Puppet',
          '--memory', server["ram"],
       ]
     end
@@ -99,8 +99,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # prepare puppetmaster environment
       test -d /etc/puppet || mkdir /etc/puppet
       cp /vagrant/files/autosign.conf /etc/puppet
-      cp /vagrant/files/hiera.yaml /etc/puppet
-      cp /vagrant/files/r10k.yaml /etc/puppet
+      cp /vagrant/files/*.yaml /etc/puppet
       # add ssh keys for accessing git server
       test -d ~/.ssh || cp -rf /vagrant/files/.ssh ~
       chmod 600 ~/.ssh/id_rsa
